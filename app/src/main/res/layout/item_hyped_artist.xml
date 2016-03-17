@@ -8,7 +8,6 @@
     app:cardBackgroundColor="@color/colorPrimaryDark"
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp">
-
     <ImageView
         android:id="@+id/img_artist"
         android:layout_width="match_parent"

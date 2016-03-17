@@ -12,15 +12,22 @@ import android.view.ViewGroup;
 
 import com.platzi.sezzh.thefm.R;
 import com.platzi.sezzh.thefm.domain.Artist;
+import com.platzi.sezzh.thefm.io.LastFmApiAdapter;
+import com.platzi.sezzh.thefm.io.models.TopArtistResponse;
 import com.platzi.sezzh.thefm.ui.adapter.HypedArtistAdapter;
 
 import java.util.ArrayList;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 /**
  * Created by sezzh on 07/03/2016.
  */
-public class HypedArtistFragment extends Fragment {
+public class HypedArtistFragment extends Fragment
+    implements Callback<TopArtistResponse> {
 
   public static final Integer NUM_COLUMNS = 2;
   private RecyclerView mHypedArtistList;
@@ -42,9 +49,16 @@ public class HypedArtistFragment extends Fragment {
         .findViewById(R.id.hyped_artists_list);
 
     this.setupArtistList();
-    this.setDummyContent();
 
     return root;
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    LastFmApiAdapter.getApiService()
+        .getTopArtists(this);
+
   }
 
   private void setupArtistList() {
@@ -66,5 +80,15 @@ public class HypedArtistFragment extends Fragment {
       artistsDummy.add(new Artist("Artist" + i));
     }
     this.adapter.addAll(artistsDummy);
+  }
+
+  @Override
+  public void success(TopArtistResponse topArtistResponse, Response response) {
+    this.adapter.addAll(topArtistResponse.getArtists());
+  }
+
+  @Override
+  public void failure(RetrofitError error) {
+    error.printStackTrace();
   }
 }
