@@ -1,4 +1,4 @@
-package com.platzi.sezzh.thefm.ui.adapter;
+package com.platzi.sezzh.thefm.ui.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import com.platzi.sezzh.thefm.R;
 import com.platzi.sezzh.thefm.domain.Artist;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by sezzh on 15/03/2016.
@@ -41,6 +41,11 @@ public class HypedArtistAdapter extends
   public void onBindViewHolder(HypedArtistViewHolder holder, int position) {
     Artist currentArtist = artistList.get(position);
     holder.setArtistName(currentArtist.getName());
+    if (currentArtist.getUrlMediumImage() != null) {
+      holder.setArtistImage(currentArtist.getUrlMediumImage());
+    } else {
+      holder.setArtistImageDefault();
+    }
   }
 
   @Override
@@ -53,10 +58,10 @@ public class HypedArtistAdapter extends
       throw new NullPointerException("The items cannot be null");
     } else {
       this.artistList.addAll(artistList);
-      this.notifyItemRangeInserted(
+      /*this.notifyItemRangeInserted(
           this.getItemCount() - 1, this.artistList.size()
-      );
-      // this.notifyDataSetChanged(); Another possibilities of notify.
+      );*/
+      this.notifyDataSetChanged(); // Another possibilities of notify.
     }
   }
 
@@ -79,6 +84,19 @@ public class HypedArtistAdapter extends
 
     public void setArtistName(String name) {
       this.artistName.setText(name);
+    }
+
+    public void setArtistImage(String url) {
+      Picasso.with(context)
+          .load(url)
+          .placeholder(R.drawable.artist_placeholder)
+          .into(artistImage);
+    }
+
+    public void setArtistImageDefault() {
+      Picasso.with(context)
+          .load(R.drawable.artist_placeholder)
+          .into(artistImage);
     }
 
   }

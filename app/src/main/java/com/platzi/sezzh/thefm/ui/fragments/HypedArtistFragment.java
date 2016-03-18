@@ -1,4 +1,4 @@
-package com.platzi.sezzh.thefm.ui;
+package com.platzi.sezzh.thefm.ui.fragments;
 
 
 import android.os.Bundle;
@@ -14,7 +14,8 @@ import com.platzi.sezzh.thefm.R;
 import com.platzi.sezzh.thefm.domain.Artist;
 import com.platzi.sezzh.thefm.io.LastFmApiAdapter;
 import com.platzi.sezzh.thefm.io.models.TopArtistResponse;
-import com.platzi.sezzh.thefm.ui.adapter.HypedArtistAdapter;
+import com.platzi.sezzh.thefm.ui.ItemOffsetDecoration;
+import com.platzi.sezzh.thefm.ui.adapters.HypedArtistAdapter;
 
 import java.util.ArrayList;
 

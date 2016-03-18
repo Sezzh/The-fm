@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 
-import com.platzi.sezzh.thefm.ui.HypedArtistFragment;
+import com.platzi.sezzh.thefm.ui.fragments.HypedArtistFragment;
 
 public class MainActivity extends AppCompatActivity {
   @Override

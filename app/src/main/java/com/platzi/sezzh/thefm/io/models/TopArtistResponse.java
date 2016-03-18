@@ -15,13 +15,16 @@ public class TopArtistResponse {
   @SerializedName(JsonKeys.ARTISTS_RESULTS)
   TopArtistResults results;
 
+  public void setArtists(ArrayList<Artist> artists) {
+    this.results.artists = artists;
+  }
+
   public ArrayList<Artist> getArtists() {
     return this.results.artists;
   }
 
   private class TopArtistResults {
 
-    @SerializedName(JsonKeys.ARTISTS_ARRAY)
     ArrayList<Artist> artists;
 
   }
